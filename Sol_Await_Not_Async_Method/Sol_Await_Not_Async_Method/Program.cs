@@ -38,6 +38,12 @@ namespace Sol_Await_Not_Async_Method
 
             RunTask(() => { System.Console.WriteLine("Kishor Naik"); });
 
+            #region return value from task on non async method
+
+            System.Console.WriteLine(GetString());
+
+            #endregion
+
         }
 
         private static Task SetStringMsg()
@@ -58,5 +64,22 @@ namespace Sol_Await_Not_Async_Method
         {
             Task.Run(ActionObj).Wait();
         }
+
+
+        #region return value from task on non async method
+
+        private static String GetString()
+        {
+            String Str = String.Empty;
+            Task.Factory.StartNew(() =>
+            {
+                Str = "Hello Async";
+                return Str;
+            }).Wait();
+
+            return Str;
+        }
+
+        #endregion
     }
 }
